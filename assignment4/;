@@ -1,0 +1,170 @@
+/* File: AssignmentFour.c
+ * Author: James A. Bryant
+ * Date: April 9th, 2015
+ * Course: COP 3502 - Computer Science
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define	BUFSIZE 100
+char *instructions[] = {
+	"Binary Search Tree Options",
+	"=============================",
+	"1) Generate Binary Search Tree",
+	"2) Print the BST in pre-order format",
+	"3) Print the BST in in-order format",
+	"4) Print the BST in post-order format",
+	"5) Print the BST in breadth-first format",
+	"6) Find a value in the BST",
+	"7) Find the minimum value in the BST nodes",
+	"8) Find the maximum value in the BST nodes",
+	"9) Calculate the average value of the BST nodes",
+	"10) Find the median value of the BST nodes",
+	"11) Calculate the sum of the BST nodes",
+	"12) Count the number of BST nodes",
+	"13) Delete a value in the BST",
+	"14) Exit Program",
+	"============================="
+};
+
+// Struct
+struct binTreeNode
+{
+	int data;
+	struct binTree *right;
+	struct binTree *left;
+};
+// Make my life easier with the following...
+typedef struct binTreeNode *Node;
+
+// Prototypes
+int get_user_input();
+void die( char *str );
+Node generate_BST( Node *tree_root, char *input_file );
+Node create_BST_node( int data );
+Node insert_into_tree( Node *root, Node insert);
+int main( int argc, char *argv[] )
+{
+	int user_input;	// Hold user input
+	int i = 0;	// loop index
+	// Launch an infinite loop
+	do
+	{
+		// Print the options/instructions
+		for( i = 0; i < 17; i++ ) 
+		{
+			printf("%s\n", instructions[i] );
+		}
+		// Prompt for input
+		printf("Make a selection: \n");
+		user_input = get_user_input();
+		
+		// Check user-input for next step
+		switch( user_input )
+		{
+			case 1:
+				// Generate binary search tree from file
+				
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
+			case 8:
+				break;
+			case 9:
+				break;
+			case 10:
+				break;
+			case 11:
+				break;
+			case 12:
+				break;
+			case 13:
+				break;
+			case 14:
+				printf("Thanks for participating\n");
+				exit(1);
+			case -1:
+				printf("Bad input, try again.\n");
+				continue;
+		}
+	}
+	while( 1 );
+	return 0;
+}
+
+int get_user_input()
+{
+	// Get user input
+	char input[BUFSIZE];;
+	int converted;
+	char *p;
+	if( fgets( input, BUFSIZE, stdin ) != NULL );
+	// convert
+	converted = atoi( input );
+
+	// validate
+	if( (converted == 0) || (converted > 14) )
+		return -1;
+	else
+		return converted;
+}
+
+
+Node generate_BST( Node *tree_root, char *input_file )
+{
+	// Holds incoming data from file:w
+	int data;
+
+	// Check if file has already been read
+	if( *tree_root != NULL )
+	{
+		printf("File has already been read from.\n");
+		return;
+	}
+
+	// Open file for reading, if possible
+	FILE *file_ptr = fopen("AssignmentFourInput.txt", "r");
+	if( file_ptr == NULL )
+	{
+		die("Error opening file. Make sure the file name is correct\n");
+	}
+	else
+	{
+		// File has been opened. Let's read from it.
+		while( fscanf( file_ptr, "%d", &data ) != EOF )
+		{
+			// Create a new node
+			Node new_node = create_BST_node( data );
+
+			// Insert a new node
+
+		}
+	}
+} // End generate_BST
+
+Node create_BST_node( int data )
+{
+	Node temp = (Node)malloc( sizeof( struct binTreeNode) );
+	(*temp).data = data;
+	(*temp).right = NULL;
+	(*temp).left = NULL;
+	return temp;
+} // End create_BST_node
+
+
+void die( char *str )
+{
+	printf("%s\n", str);
+	exit(1);
+}
